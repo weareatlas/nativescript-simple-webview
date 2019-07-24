@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "target": "es6",
         "module": "commonjs",
+        "moduleResolution": "node",
         "declaration": false,
         "removeComments": true,
         "noLib": false,
@@ -21,7 +22,8 @@
         "noFallthroughCasesInSwitch": true
     },
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "platforms"
     ],
     "compileOnSave": false
 }

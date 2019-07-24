@@ -42,12 +42,10 @@ export function openUrl(options: SimpleWebViewOptions): SimpleWebView {
 
     viewController.delegate = SFSafariViewControllerDelegateImpl.initWithOwnerCallback(new WeakRef({}), options.isClosed);
 
-    let app = utils.ios.getter(UIApplication, UIApplication.sharedApplication);
-
     const isAnimated = options.isAnimated || false;
     const completionHandler = null;
 
-    app.keyWindow.rootViewController.presentViewControllerAnimatedCompletion(viewController, isAnimated, completionHandler);
+    UIApplication.sharedApplication.keyWindow.rootViewController.presentViewControllerAnimatedCompletion(viewController, isAnimated, completionHandler);
 
     return {
         close: () => {
