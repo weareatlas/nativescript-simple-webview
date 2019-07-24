@@ -1,6 +1,6 @@
 {
     "name": "nativescript-simple-webview",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A simple webview using Chrome CustomTabs for Android and SFSafariViewController for iOS.",
     "main": "simple-webview",
     "typings": "index.d.ts",
