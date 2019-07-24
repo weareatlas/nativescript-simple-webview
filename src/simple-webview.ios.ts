@@ -1,17 +1,18 @@
 import {Color} from 'tns-core-modules/color';
-import * as utils from 'tns-core-modules/utils/utils';
 import {SimpleWebView, SimpleWebViewOptions} from "./index";
 
 class SFSafariViewControllerDelegateImpl extends NSObject implements SFSafariViewControllerDelegate {
 
-    private _owner: WeakRef<any>;
     private _callback: Function;
 
-    public static initWithOwnerCallback(owner: WeakRef<any>, callback: Function): SFSafariViewControllerDelegateImpl {
-        let delegate = <SFSafariViewControllerDelegateImpl>SFSafariViewControllerDelegateImpl.new();
-        delegate._owner = owner;
-        delegate._callback = callback;
-        return delegate;
+    static ObjCProtocols = [SFSafariViewControllerDelegate]
+
+    static new(): SFSafariViewControllerDelegateImpl {
+        return <SFSafariViewControllerDelegateImpl>super.new();
+    }
+
+    setCallback(callback: Function) {
+        this._callback = callback;
     }
 
     safariViewControllerDidCompleteInitialLoad(controller: SFSafariViewController, didLoadSuccessfully: boolean): void {
@@ -40,12 +41,20 @@ export function openUrl(options: SimpleWebViewOptions): SimpleWebView {
         viewController.preferredControlTintColor = new Color(options.toolbarControlsColor).ios;
     }
 
-    viewController.delegate = SFSafariViewControllerDelegateImpl.initWithOwnerCallback(new WeakRef({}), options.isClosed);
+    const delegate = new SFSafariViewControllerDelegateImpl();
+
+    if (options.isClosed) {
+        delegate.setCallback(options.isClosed);
+    }
+
+    viewController.delegate = delegate;
+
+    let app = UIApplication.sharedApplication;
 
     const isAnimated = options.isAnimated || false;
     const completionHandler = null;
 
-    UIApplication.sharedApplication.keyWindow.rootViewController.presentViewControllerAnimatedCompletion(viewController, isAnimated, completionHandler);
+    app.keyWindow.rootViewController.presentViewControllerAnimatedCompletion(viewController, isAnimated, completionHandler);
 
     return {
         close: () => {
