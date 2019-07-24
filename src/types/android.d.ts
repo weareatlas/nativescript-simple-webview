@@ -1,6 +1,6 @@
-declare module android {
-    export module support {
-        export module customtabs {
+declare namespace android {
+    export namespace support {
+        export namespace customtabs {
             export class CustomTabsIntent {
                 launchUrl(context: android.content.Context, url: android.net.Uri): void;
             }
