@@ -37,9 +37,4 @@ export interface SimpleWebViewOptions {
      * The color of the toolbar controls (ios only).
      */
     toolbarControlsColor?: string;
-
-    /**
-     * Callback for when the web view is closed.
-     */
-    isClosed?: (closed: boolean) => void;
 }

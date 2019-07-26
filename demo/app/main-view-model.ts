@@ -8,8 +8,10 @@ export class HelloWorldModel extends Observable {
     }
 
     public onTap() {
-        openUrl({
+        const x = openUrl({
             url: 'http://www.google.com',
         });
+
+        setTimeout(x.close, 5000);
     }
 }
