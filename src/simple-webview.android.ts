@@ -1,7 +1,7 @@
 import * as app from 'tns-core-modules/application';
 import {Color} from 'tns-core-modules/color';
 import {SimpleWebView, SimpleWebViewOptions} from "./index";
-import CustomTabsIntent = android.support.customtabs.CustomTabsIntent;
+import CustomTabsIntent = androidx.browser.customtabs.CustomTabsIntent;
 
 const REQUEST_CODE = 1868;
 
@@ -16,9 +16,6 @@ export function openUrl(options: SimpleWebViewOptions): SimpleWebView {
         const resultCode = args.resultCode;
         if (requestCode === REQUEST_CODE) {
             if (resultCode === (<any> android).app.Activity.RESULT_CANCELED) {
-                if (options.isClosed && typeof options.isClosed === 'function') {
-                    options.isClosed(true);
-                }
                 app.android.off(app.AndroidApplication.activityResultEvent);
             }
         }
