@@ -1,6 +1,10 @@
 {
     "name": "nativescript-simple-webview",
-    "version": "1.1.4",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/garystubbings/nativescript-simple-webview.git"
+    },
+    "version": "1.1.5",
     "description": "A simple webview using Chrome CustomTabs for Android and SFSafariViewController for iOS.",
     "main": "simple-webview",
     "typings": "index.d.ts",

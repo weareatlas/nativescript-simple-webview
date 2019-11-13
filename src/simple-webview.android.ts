@@ -36,7 +36,9 @@ export function openUrl(options: SimpleWebViewOptions): SimpleWebView {
         intentBuilder.addDefaultShareMenuItem(); /// Adds a default share item to the menu.
         intentBuilder.enableUrlBarHiding(); /// Enables the url bar to hide as the user scrolls down on the page.
     }
-    intentBuilder.build().launchUrl(activity, android.net.Uri.parse(options.url));
+    const customTabsIntent = intentBuilder.build();
+    customTabsIntent.intent.setFlags(android.content.Intent.FLAG_ACTIVITY_NO_HISTORY | android.content.Intent.FLAG_ACTIVITY_NEW_TASK);
+    customTabsIntent.launchUrl(activity, android.net.Uri.parse(options.url));
 
     return {
         close: () => {

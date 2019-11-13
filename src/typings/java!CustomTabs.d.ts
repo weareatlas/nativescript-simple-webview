@@ -3,6 +3,7 @@ declare namespace androidx {
         export namespace customtabs {
             export class CustomTabsIntent {
                 launchUrl(context: android.content.Context, url: android.net.Uri): void;
+                intent: android.content.Intent;
             }
             namespace CustomTabsIntent {
                 export class Builder {
